@@ -27,7 +27,7 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 
 @interface KIKeyChain : NSObject
 
-//存、取对象的快捷方法
+//存、取值的快捷方法
 + (id)valueForIdentifier:(NSString *)identifier;
 
 + (BOOL)setValue:(id)value forIdentifier:(NSString *)identifier;
@@ -41,7 +41,7 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 
 - (instancetype)initWithIdentifier:(NSString *)identifier accessGroup:(NSString *)accessGroup;
 
-//一般情况下，不要直接调用这两个方法存、取对象，应该使用下面category中提供的方法进行操作
+//一般情况下，不要直接调用这两个方法存、取值，应该使用下面category中提供的方法进行操作
 - (void)setObject:(id)inObject forKey:(id)key;
 
 - (id)objectForKey:(id)key;
