@@ -6,4 +6,16 @@
 
 网上有很多关于 KeyChain 的访问组件，Apple 也提供了相应的 [Demo](https://developer.apple.com/library/ios/samplecode/GenericKeychain/Introduction/Intro.html)。但是，感觉不怎么实用，操作起来相对麻烦。所以决定自己对其重新进行封装，所以就有了这个 KIKeyChain 这个组件。
 
-具体怎么集成，相信大家在看了我提供的 Demo 之后就明白了。
+具体怎么集成，就是如此简单：
+
+写入数据：
+
+    KIKeyChain *key = [KIKeyChain keyChainWithIdentifier:@"default_user"];
+    [key setValue:@"user1" forKey:@"username"];
+    [key setValue:@"password1" forKey:@"password"];
+    [key write];
+
+读取数据：
+
+    KIKeyChain *key = [KIKeyChain keyChainWithIdentifier:@"default_user"];
+    NSLog(@"%@==%@", [key valueForKey:@"username"], [key valueForKey:@"password"]);
