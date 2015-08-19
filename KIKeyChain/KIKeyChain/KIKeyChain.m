@@ -32,8 +32,10 @@ See the header file Security/SecItem.h for more details.
 
 */
 
+#pragma mark - Extesnion KIKeyChain
 @interface KIKeyChain ()
 
+#pragma mark - Property
 @property (nonatomic, retain) NSMutableDictionary *itemData;
 @property (nonatomic, retain) NSMutableDictionary *query;
 
@@ -43,6 +45,7 @@ See the header file Security/SecItem.h for more details.
 
 @implementation KIKeyChain
 
+#pragma mark - Class Methods
 + (id)valueForIdentifier:(NSString *)identifier {
     KIKeyChain *keyChain = [[KIKeyChain alloc] initWithIdentifier:identifier accessGroup:nil];
     return [keyChain value];
@@ -62,6 +65,8 @@ See the header file Security/SecItem.h for more details.
     return [[KIKeyChain alloc] initWithIdentifier:identifier accessGroup:accessGroup];
 }
 
+
+#pragma mark - Lifecycle
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     return [self initWithIdentifier:identifier accessGroup:nil];
 }
@@ -107,15 +112,12 @@ See the header file Security/SecItem.h for more details.
 	return self;
 }
 
+#pragma mark - Methods
 - (void)setObject:(id)inObject forKey:(id)key  {
     if (inObject == nil) {
         return;
     }
-//    id currentObject = [self.itemData objectForKey:key];
-//    if (![currentObject isEqual:inObject]) {
-        [self.itemData setObject:inObject forKey:key];
-//        [self writeToKeychain];
-//    }
+    [self.itemData setObject:inObject forKey:key];
 }
 
 - (id)objectForKey:(id)key {
@@ -135,7 +137,6 @@ See the header file Security/SecItem.h for more details.
     [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrAccount];
     [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrLabel];
     [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrDescription];
-//    [self.itemData setObject:nil forKey:(__bridge id)kSecValueData];
     
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *service = [NSString stringWithFormat:@"%f.%@", [[NSDate date] timeIntervalSince1970], bundle.bundleIdentifier];
@@ -150,7 +151,6 @@ See the header file Security/SecItem.h for more details.
     id data = [dictionaryToConvert objectForKey:(__bridge id)kSecValueData];
     data = [NSKeyedArchiver archivedDataWithRootObject:data];
     
-//    NSString *valueString = [dictionaryToConvert objectForKey:(__bridge id)kSecValueData];
     [result setObject:data forKey:(__bridge id)kSecValueData];
     
     return result;
@@ -249,6 +249,7 @@ See the header file Security/SecItem.h for more details.
 
 @implementation KIKeyChain (KIKeyChain)
 
+#pragma mark - Getters and Setters
 - (void)setAccount:(NSString *)account {
     [self setObject:account forKey:(__bridge id)kSecAttrAccount];
 }
@@ -343,11 +344,6 @@ See the header file Security/SecItem.h for more details.
     return (BOOL)CFBooleanGetValue((CFBooleanRef)v);
 }
 
-//- (void)setModificationDate:(NSDate *)modificationDate {
-//    CFDateRef date = (__bridge CFDateRef)modificationDate;
-//    [self setObject:(__bridge id)(date) forKey:(__bridge id)kSecAttrModificationDate];
-//}
-
 - (NSDate *)modificationDate {
     CFDateRef date = (__bridge CFDateRef)[self objectForKey:(__bridge id)kSecAttrModificationDate];
     return (__bridge NSDate *)date;
@@ -370,6 +366,7 @@ See the header file Security/SecItem.h for more details.
 
 @implementation KIKeyChain (NSKeyValueCoding)
 
+#pragma mark - NSKeyValueCoding
 - (id)valueForKey:(NSString *)key {
     id object = [self value];
     if ([object respondsToSelector:@selector(valueForKey:)]) {

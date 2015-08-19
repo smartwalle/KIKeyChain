@@ -25,6 +25,7 @@ KIKeyChain *key2 = [[KIKeyChain alloc] initWithIdentifier:@"user2"];
 NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"]);
  */
 
+#pragma mark - Interface KIKeyChain
 @interface KIKeyChain : NSObject
 
 //存、取值的快捷方法
@@ -32,10 +33,10 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 
 + (BOOL)setValue:(id)value forIdentifier:(NSString *)identifier;
 
-
 + (KIKeyChain *)keyChainWithIdentifier:(NSString *)identifier;
 
 + (KIKeyChain *)keyChainWithIdentifier:(NSString *)identifier accessGroup:(NSString *)accessGroup;
+
 
 - (instancetype)initWithIdentifier:(NSString *)identifier;
 
@@ -54,6 +55,7 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 
 @end
 
+#pragma mark - Category KIKeyChain(KIKeyChain)
 @interface KIKeyChain (KIKeyChain)
 
 //kSecAttrAccount - CFStringRef
@@ -101,6 +103,7 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 
 @end
 
+#pragma mark - Category KIKeyChain(NSKeyValueCoding)
 //本Category的所有方法都是针对 kSecValueData 字段存储的对象，也就是[KIKeyChain value]返回的对象
 @interface KIKeyChain (NSKeyValueCoding)
 
