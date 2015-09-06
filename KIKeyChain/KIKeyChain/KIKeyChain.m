@@ -39,6 +39,9 @@ See the header file Security/SecItem.h for more details.
 @property (nonatomic, retain) NSMutableDictionary *itemData;
 @property (nonatomic, retain) NSMutableDictionary *query;
 
+@property (nonatomic, copy) NSString *accessGroup;
+@property (nonatomic, copy) NSString *identifier;
+
 - (BOOL)writeToKeychain;
 
 @end
@@ -77,6 +80,9 @@ See the header file Security/SecItem.h for more details.
             return nil;
         }
         
+        [self setIdentifier:identifier];
+        [self setAccessGroup:accessGroup];
+        
         self.query = [[NSMutableDictionary alloc] init];
 		[self.query setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
         [self.query setObject:identifier forKey:(__bridge id)kSecAttrGeneric];
@@ -99,14 +105,6 @@ See the header file Security/SecItem.h for more details.
             self.itemData = [self secItemFormatToDictionary:result];
 		} else {
             [self reset];
-            
-            [self.itemData setObject:identifier forKey:(__bridge id)kSecAttrGeneric];
-            if (accessGroup != nil) {
-#if TARGET_IPHONE_SIMULATOR
-#else			
-                [self.itemData setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
-#endif
-            }
         }
     }
 	return self;
@@ -134,9 +132,21 @@ See the header file Security/SecItem.h for more details.
         NSAssert( junk == noErr || junk == errSecItemNotFound, @"Problem deleting current dictionary." );
     }
     
-    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrAccount];
-    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrLabel];
-    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrDescription];
+//    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrAccount];
+//    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrLabel];
+//    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrComment];
+//    [self.itemData setObject:@"" forKey:(__bridge id)kSecAttrDescription];
+//    [self.itemData removeObjectForKey:(__bridge id)kSecValueData];
+    
+    [self.itemData removeAllObjects];
+    
+    [self.itemData setObject:self.identifier forKey:(__bridge id)kSecAttrGeneric];
+    if (self.accessGroup != nil) {
+#if TARGET_IPHONE_SIMULATOR
+#else
+        [self.itemData setObject:self.accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
+#endif
+    }
     
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *service = [NSString stringWithFormat:@"%f.%@", [[NSDate date] timeIntervalSince1970], bundle.bundleIdentifier];

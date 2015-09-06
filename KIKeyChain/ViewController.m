@@ -34,6 +34,10 @@
     
     KIKeyChain *key = [KIKeyChain keyChainWithIdentifier:@"default_user"];
     
+     NSLog(@"%@==%@", [key valueForKey:@"username"], [key valueForKey:@"password"]);
+    
+    [key reset];
+    
     NSLog(@"%@==%@", [key valueForKey:@"username"], [key valueForKey:@"password"]);
 }
 
