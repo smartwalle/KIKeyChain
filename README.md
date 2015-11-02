@@ -8,6 +8,10 @@
 
 使用方法如下：
 
+Pods:
+
+	pod 'KIKeyChain', :git => "https://github.com/smartwalle/KIKeyChain.git", :tag => '0.1'
+
 写入数据：
 
     KIKeyChain *key = [KIKeyChain keyChainWithIdentifier:@"default_user"];
