@@ -308,14 +308,14 @@ See the header file Security/SecItem.h for more details.
     return (NSString *)[self objectForKey:(__bridge id)kSecAttrService];
 }
 
-- (void)setType:(NSNumber *)type {
-    CFNumberRef number = (__bridge CFNumberRef)type;
+- (void)setType:(NSInteger)type {
+    CFNumberRef number = (__bridge CFNumberRef)@(type);
     [self setObject:(__bridge id)(number) forKey:(__bridge id)kSecAttrType];
 }
 
-- (NSNumber *)type {
+- (NSInteger)type {
     CFNumberRef number = (__bridge CFNumberRef)([self objectForKey:(__bridge id)kSecAttrType]);
-    return (__bridge NSNumber *)number;
+    return [(__bridge NSNumber *)number integerValue];
 }
 
 - (void)setCreator:(NSNumber *)creator {

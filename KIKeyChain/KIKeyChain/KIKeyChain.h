@@ -78,7 +78,7 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 @property (nonatomic) NSString *service;
 
 //kSecAttrType - CFNumberRef
-@property (nonatomic) NSNumber *type;
+@property (nonatomic) NSInteger type;
 
 //kSecAttrCreator - CFNumberRef
 @property (nonatomic) NSNumber *creator;
