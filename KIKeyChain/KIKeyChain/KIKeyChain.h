@@ -95,11 +95,11 @@ NSLog(@"%@==%@", [key2 valueForKey:@"username"], [key2 valueForKey:@"password"])
 //kSecAttrCreationDate - CFDateRef
 @property (nonatomic, readonly) NSDate *creationDate;
 
-//kSecAttrAccessGroup - CFStringRef
-@property (nonatomic, readonly) NSString *accessGroup;
-
 //kSecAttrGeneric - CFStringRef
 @property (nonatomic, readonly) NSString *generic; //即传入的 identifier
+
+//kSecAttrAccessGroup - CFStringRef
+- (NSString *)accessGroup;
 
 @end
 
