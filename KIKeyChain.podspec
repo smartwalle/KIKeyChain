@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "KIKeyChain"
-  s.version      = "0.1"
-  s.summary      = "快速访问 KeyChain 的组件。"
+  s.version      = "0.0.1"
+  s.summary      = "KIKeyChain"
   s.description  = <<-DESC
                    ## KIKeyChain
 
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "SmartWalle" => "smartwalle@gmail.com" }
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/smartwalle/KIKeyChain.git", :tag => "0.1" }
+  s.source       = { :git => "https://github.com/smartwalle/KIKeyChain.git", :tag => "#{s.version}" }
   s.source_files = "KIKeyChain/KIKeyChain/*.{h,m}"
   s.framework    = "Security"
   s.requires_arc = true
