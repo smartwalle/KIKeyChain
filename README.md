@@ -10,7 +10,7 @@
 
 Pods:
 
-	pod 'KIKeyChain', :git => "https://github.com/smartwalle/KIKeyChain.git", :tag => '0.1'
+	pod 'KIKeyChain'
 
 写入数据：
 

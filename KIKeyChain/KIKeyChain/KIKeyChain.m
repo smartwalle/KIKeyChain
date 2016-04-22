@@ -39,7 +39,7 @@ See the header file Security/SecItem.h for more details.
 @property (nonatomic, retain) NSMutableDictionary *itemData;
 @property (nonatomic, retain) NSMutableDictionary *query;
 
-@property (nonatomic, copy) NSString *accessGroup;
+@property (nonatomic, copy) NSString *group;
 @property (nonatomic, copy) NSString *identifier;
 
 - (BOOL)writeToKeychain;
@@ -81,7 +81,7 @@ See the header file Security/SecItem.h for more details.
         }
         
         [self setIdentifier:identifier];
-        [self setAccessGroup:accessGroup];
+        [self setGroup:accessGroup];
         
         self.query = [[NSMutableDictionary alloc] init];
 		[self.query setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
@@ -141,10 +141,10 @@ See the header file Security/SecItem.h for more details.
     [self.itemData removeAllObjects];
     
     [self.itemData setObject:self.identifier forKey:(__bridge id)kSecAttrGeneric];
-    if (self.accessGroup != nil) {
+    if (self.group != nil) {
 #if TARGET_IPHONE_SIMULATOR
 #else
-        [self.itemData setObject:self.accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
+        [self.itemData setObject:self.group forKey:(__bridge id)kSecAttrAccessGroup];
 #endif
     }
     
